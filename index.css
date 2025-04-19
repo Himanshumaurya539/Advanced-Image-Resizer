@@ -1,0 +1,178 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://www.unite.ai/wp-content/uploads/2022/05/Image-Processing-Python-Libraries.png') no-repeat center center/cover; /* Background image */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+
+
+
+h1, h3, label, p {
+    color: white;
+}
+/* Dark overlay for better text readability */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay effect */
+    z-index: 1;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.95);
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #ffea2b;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ffea2b;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: 0.3s ease-in-out;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ffea2b;
+    box-shadow: 0 0 10px rgba(255, 75, 43, 0.3);
+}
+
+button {
+    background: #ffea2b;
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #ffea2b;
+}
+
+.preview,
+.output {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.preview img,
+.output img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.download-btn {
+    margin-top: 10px;
+    background: #28a745;
+    transition: background 0.3s ease-in-out;
+}
+
+.download-btn:hover {
+    background: #218838;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#preview-img {
+    display: none;
+    max-width: 200px;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* General styling for the resized image */
+#resized-img {
+    display: none;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Desktop-specific resizing */
+@media (min-width: 400px) {
+    #resized-img {
+        max-width: 200px;  /* or whatever smaller size you want */
+        height: auto;
+    }
+}
+
+/* Mobile or small screens — keep it flexible */
+@media (max-width: 400px) {
+    #resized-img {
+        max-width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

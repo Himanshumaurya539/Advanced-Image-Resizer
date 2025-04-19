@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Image Resizer</title>
+    <link rel="stylesheet" href="static/index.css">
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</head>
+<body>
+    <div class="overlay"></div>  <!-- Background overlay -->
+    <div class="container">
+        <h1><i class="fas fa-image"></i> Image Resizer Tool</h1>
+        <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+            <div class="form-group">
+                <label for="image"><i class="fas fa-upload"></i> Upload Image:</label>
+                <input type="file" name="image" id="image" accept="image/*" required onchange="showPreview(event)">
+            </div>
+            <div class="form-group">
+                <label for="pixels"><i class="fas fa-expand"></i> Total Pixels:</label>
+                <input type="number" name="pixels" id="pixels" placeholder="Enter total pixel count (e.g., 100000)" required>
+            </div>
+            <button type="submit"><i class="fas fa-compress-arrows-alt"></i> Resize Image</button>
+        </form>
+        <div class="preview">
+            <h3><i class="fas fa-eye"></i> Image Preview</h3>
+            <p id="preview-text">No image uploaded yet.</p>
+            <img id="preview-img" src="" alt="Image Preview">
+
+        </div>
+        <div class="output">
+            <h3><i class="fas fa-download"></i> Resized Image</h3>
+            <img id="resized-img" src="" alt="Resized Image">
+
+            <a id="download-link" href="#" download="resized_image.jpg" style="display: none;">
+                <button class="download-btn"><i class="fas fa-download"></i> Download</button>
+            </a>
+        </div>
+        <footer>
+            <p>&copy; 2025 Image Resizer hm's. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Preview image before uploading
+        function showPreview(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const previewImg = document.getElementById("preview-img");
+                    const previewText = document.getElementById("preview-text");
+                    previewText.style.display = 'none';
+                    previewImg.style.display = 'block';
+                    previewImg.src = reader.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Show a loading state when submitting the form
+        function showLoading() {
+            document.getElementById("resized-img").style.display = 'none';
+            document.getElementById("download-link").style.display = 'none';
+        }
+
+        // Handle the form submission response (to show resized image)
+        const form = document.getElementById('upload-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the default form submission
+            const formData = new FormData(form);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const resizedImg = document.getElementById('resized-img');
+                const downloadLink = document.getElementById('download-link');
+                const resizedImageURL = URL.createObjectURL(blob);
+                resizedImg.src = resizedImageURL;
+                resizedImg.style.display = 'block';
+                downloadLink.style.display = 'inline-block';
+                downloadLink.href = resizedImageURL;
+            })
+            .catch(error => {
+                console.error('Error uploading image:', error);
+            });
+        });
+    </script>
+</body>
+</html>
